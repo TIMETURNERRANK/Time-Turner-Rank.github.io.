@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Turner Ranker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        :root {
+            --primary-color: #6a1b9a;
+            --secondary-color: #9c27b0;
+            --hover-color: #8e24aa;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .top-grid {
+            padding: 20px;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .top-grid h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            position: relative;
+            width: 85px;
+            height: 85px;
+            cursor: pointer;
+        }
+
+        .profile-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .profile-circle.active {
+            background-color: #fff;
+            border: 2px solid var(--secondary-color);
+            overflow: hidden;
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .number {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 22px;
+            height: 22px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--secondary-color);
+            font-weight: bold;
+            font-size: 12px;
+            color: var(--primary-color);
+        }
+
+        .crown-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .search-container {
+            max-width: 360px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #fff;
+        }
+
+        .profiles-container {
+            max-width: 360px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .profiles-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .profile-pic {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        .profile-year {
+            color: #666;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-year:before {
+            content: "✦";
+            margin-right: 5px;
+            color: var(--secondary-color);
+        }
+
+.profile-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.number {
+    position: flex;
+    bottom: 0px; /* Mantenha o número na parte inferior da imagem */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Compensa a largura do número para ficar exatamente no meio */
+    width: 18px; /* Diminui a largura do número */
+    height: 18px; /* Diminui a altura do número */
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--secondary-color);
+    font-weight: bold;
+    font-size: 10px; /* Diminui o tamanho da fonte */
+    color: var(--primary-color);
+    z-index: 1; /* Garante que o número fique acima da imagem */
+}
+
+        .get-link-btn {
+            display: block;
+            width: 120px;
+            margin: 20px auto;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .get-link-btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        .selected {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .profiles-list::-webkit-scrollbar {
+            width: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TIME TURNER RANKER</h1>
+        <p>Faça seu próprio top 6!</p>
+    </div>
+
+    <div class="top-grid">
+        <h2>TOP 6</h2>
+        <div class="grid-container" id="rankGrid">
+            <!-- Grid items will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Pesquisar">
+    </div>
+
+    <div class="profiles-container">
+        <div class="profiles-list" id="profilesList">
+            <!-- Profiles will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <button class="get-link-btn">Get link</button>
+
+    <script>
+        const members = [
+            { name: "Sim Yerin", year: "2001" },
+            { name: "Gwak Yujin", year: "2001" },
+            { name: "Shin Nayoung", year: "2003" },
+            { name: "Dalia Khali", year: "2002" },
+            { name: "Kelly Kim", year: "1998" },
+            { name: "Hyun Seoyeon", year: "2002" },
+            { name: "Lea Navvab", year: "2000" },
+            { name: "Annatalia Yi", year: "2000" },
+            { name: "Eungi", year: "2004" },
+            { name: "Kim Seonhyeong", year: "2003" },
+            { name: "Koi", year: "1997" },
+            { name: "Jeong Dain", year: "2004" },
+            { name: "Randa Ray", year: "2005" },
+            { name: "Lu Yuting", year: "2005" },
+            { name: "Aiala", year: "2000" },
+            { name: "Cleo", year: "2004" },
+            { name: "Hyeda", year: "1998" },
+            { name: "Goeun", year: "2000" },
+            { name: "Khloe Kim", year: "2000" }
+        ];
+
+        let selectedMembers = new Array(6).fill(null);
+
+        function initializeGrid() {
+            const grid = document.getElementById('rankGrid');
+            grid.innerHTML = '';
+
+            for (let i = 0; i < 6; i++) {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridItem.innerHTML = `
+                    <div class="profile-circle" data-position="${i}">
+                        <span class="crown-icon">👑</span>
+                        <div class="number">${i + 1}</div>
+                    </div>
+                `;
+                gridItem.addEventListener('click', handleGridClick);
+                grid.appendChild(gridItem);
+            }
+        }
+
+        function initializeProfiles() {
+            const profilesList = document.getElementById('profilesList');
+            profilesList.innerHTML = '';
+
+            members.forEach((member, index) => {
+                const profileItem = document.createElement('div');
+                profileItem.className = 'profile-item';
+                profileItem.innerHTML = `
+                    <img src="img/imagem${index + 1}.jpg" class="profile-pic">
+                    <div class="profile-info">
+                        <div class="profile-name">${member.name}</div>
+                        <div class="profile-year">${member.year}</div>
+                    </div>
+                `;
+                profileItem.addEventListener('click', () => handleProfileClick(member, index));
+                profilesList.appendChild(profileItem);
+            });
+        }
+
+        function handleProfileClick(member, index) {
+            const emptyPosition = selectedMembers.indexOf(null);
+            if (emptyPosition !== -1) {
+                selectedMembers[emptyPosition] = { ...member, originalIndex: index };
+                updateGrid();
+                updateProfiles();
+            }
+        }
+
+        function handleGridClick(event) {
+            const position = parseInt(event.currentTarget.querySelector('.profile-circle').dataset.position);
+            if (selectedMembers[position]) {
+                const member = selectedMembers[position];
+                selectedMembers[position] = null;
+                updateGrid();
+                updateProfiles();
+            }
+        }
+
+        function updateGrid() {
+            const gridItems = document.querySelectorAll('.profile-circle');
+            gridItems.forEach((item, index) => {
+                const member = selectedMembers[index];
+                if (member) {
+                    item.innerHTML = `
+                        <img src="img/imagem${member.originalIndex + 1}.jpg">
+                        <div class="number">${index + 1}</div>
+                    `;
+                    item.classList.add('active');
+                } else {
+                    item.innerHTML = `
+                        <span class="crown-icon">👑</span>
+                        <div class="number">${index + 1}</div>
+                    `;
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function updateProfiles() {
+            const profileItems = document.querySelectorAll('.profile-item');
+            profileItems.forEach((item, index) => {
+                const isSelected = selectedMembers.some(member => member && member.originalIndex === index);
+                item.classList.toggle('selected', isSelected);
+            });
+        }
+
+        document.querySelector('.search-box').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const profileItems = document.querySelectorAll('.profile-item');
+            
+            profileItems.forEach((item, index) => {
+                const name = members[index].name.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        initializeGrid();
+        initializeProfiles();
+    </script>
+</body>
+</html>
