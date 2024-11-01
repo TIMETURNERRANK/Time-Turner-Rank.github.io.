@@ -16,6 +16,9 @@
             --primary-color: #6a1b9a;
             --secondary-color: #9c27b0;
             --hover-color: #8e24aa;
+            --pink-border: #ff69b4;
+            --blue-border: #4169e1;
+            --purple-border: #8a2be2;
         }
 
         body {
@@ -24,10 +27,19 @@
         }
 
         .header {
-            background-color: var(--primary-color);
+            background: linear-gradient(45deg, #ff69b4, #4169e1, #8a2be2);
             color: white;
             padding: 25px;
             text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 15px;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
         }
 
         .header h1 {
@@ -65,13 +77,12 @@
         .grid-item {
             position: relative;
             width: 85px;
-            height: 85px;
-            cursor: pointer;
+            text-align: center;
         }
 
         .profile-circle {
-            width: 100%;
-            height: 100%;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             background-color: #ddd;
             display: flex;
@@ -79,6 +90,23 @@
             justify-content: center;
             position: relative;
             transition: all 0.3s ease;
+            margin-bottom: 5px; /* Ajustado para aumentar espaço entre a foto e o nome */
+        }
+
+        .profile-name-display {
+            position: absolute;
+            bottom: -11px; /* Desceu o nome em 1 pixel */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: uppercase; /* Nomes em maiúsculas */
         }
 
         .profile-circle.active {
@@ -96,10 +124,11 @@
 
         .number {
             position: absolute;
-            bottom: -5px;
-            right: -5px;
-            width: 22px;
-            height: 22px;
+            bottom: 4px; /* Mantido como estava */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px; /* Diminuído para 20px */
+            height: 20px; /* Diminuído para 20px */
             background-color: #fff;
             border-radius: 50%;
             display: flex;
@@ -107,8 +136,9 @@
             justify-content: center;
             border: 2px solid var(--secondary-color);
             font-weight: bold;
-            font-size: 12px;
+            font-size: 8px; /* Diminuído para 8px */
             color: var(--primary-color);
+            z-index: 2;
         }
 
         .crown-icon {
@@ -141,7 +171,7 @@
             padding: 0 20px;
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .profiles-list {
@@ -168,7 +198,18 @@
             height: 55px;
             border-radius: 50%;
             margin-right: 15px;
-            border: 2px solid var(--secondary-color);
+        }
+
+        .profile-item:nth-child(3n + 1) .profile-pic {
+            border: 2px solid var(--pink-border);
+        }
+
+        .profile-item:nth-child(3n + 2) .profile-pic {
+            border: 2px solid var(--blue-border);
+        }
+
+        .profile-item:nth-child(3n + 3) .profile-pic {
+            border: 2px solid var(--purple-border);
         }
 
         .profile-info {
@@ -179,7 +220,7 @@
             font-weight: bold;
             font-size: 15px;
             margin-bottom: 4px;
-            text-transform: uppercase;
+            text-transform: uppercase; /* Nomes em maiúsculas */
             color: var(--primary-color);
         }
 
@@ -196,38 +237,7 @@
             color: var(--secondary-color);
         }
 
-.profile-circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.number {
-    position: flex;
-    bottom: 0px; /* Mantenha o número na parte inferior da imagem */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%); /* Compensa a largura do número para ficar exatamente no meio */
-    width: 18px; /* Diminui a largura do número */
-    height: 18px; /* Diminui a altura do número */
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--secondary-color);
-    font-weight: bold;
-    font-size: 10px; /* Diminui o tamanho da fonte */
-    color: var(--primary-color);
-    z-index: 1; /* Garante que o número fique acima da imagem */
-}
-
-        .get-link-btn {
+        .copy-link-btn {
             display: block;
             width: 120px;
             margin: 20px auto;
@@ -242,8 +252,27 @@
             transition: background-color 0.3s ease;
         }
 
-        .get-link-btn:hover {
+        .copy-link-btn:hover {
             background-color: var(--hover-color);
+        }
+
+        .telegram-link {
+            display: block;
+            max-width: 360px;
+            margin: 30px auto;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff69b4, #4169e1, #8a2be2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .telegram-link:hover {
+            transform: translateY(-3px);
         }
 
         .selected {
@@ -259,6 +288,9 @@
 </head>
 <body>
     <div class="header">
+        <div class="logo-container">
+            <img src="img/sitelogo.png" alt="Site Logo">
+        </div>
         <h1>TIME TURNER RANKER</h1>
         <p>Faça seu próprio top 6!</p>
     </div>
@@ -280,7 +312,11 @@
         </div>
     </div>
 
-    <button class="get-link-btn">Get link</button>
+    <button class="copy-link-btn" onclick="copyRankingLink()">Copiar Link</button>
+    
+    <a href="https://t.me/timeturnerbr" target="_blank" class="telegram-link">
+        Siga o Time Turner Brasil no Telegram para mais novidades! 
+    </a>
 
     <script>
         const members = [
@@ -316,9 +352,9 @@
                 gridItem.className = 'grid-item';
                 gridItem.innerHTML = `
                     <div class="profile-circle" data-position="${i}">
-                        <span class="crown-icon">👑</span>
                         <div class="number">${i + 1}</div>
                     </div>
+                    <div class="profile-name-display"></div>
                 `;
                 gridItem.addEventListener('click', handleGridClick);
                 grid.appendChild(gridItem);
@@ -335,7 +371,7 @@
                 profileItem.innerHTML = `
                     <img src="img/imagem${index + 1}.jpg" class="profile-pic">
                     <div class="profile-info">
-                        <div class="profile-name">${member.name}</div>
+                        <div class="profile-name">${member.name.toUpperCase()}</div>
                         <div class="profile-year">${member.year}</div>
                     </div>
                 `;
@@ -356,7 +392,6 @@
         function handleGridClick(event) {
             const position = parseInt(event.currentTarget.querySelector('.profile-circle').dataset.position);
             if (selectedMembers[position]) {
-                const member = selectedMembers[position];
                 selectedMembers[position] = null;
                 updateGrid();
                 updateProfiles();
@@ -364,21 +399,23 @@
         }
 
         function updateGrid() {
-            const gridItems = document.querySelectorAll('.profile-circle');
+            const gridItems = document.querySelectorAll('.grid-item');
             gridItems.forEach((item, index) => {
+                const circle = item.querySelector('.profile-circle');
+                const nameDisplay = item.querySelector('.profile-name-display');
                 const member = selectedMembers[index];
+                
                 if (member) {
-                    item.innerHTML = `
+                    circle.innerHTML = `
                         <img src="img/imagem${member.originalIndex + 1}.jpg">
                         <div class="number">${index + 1}</div>
                     `;
-                    item.classList.add('active');
+                    circle.classList.add('active');
+                    nameDisplay.textContent = member.name.toUpperCase(); // Nomes em maiúsculas
                 } else {
-                    item.innerHTML = `
-                        <span class="crown-icon">👑</span>
-                        <div class="number">${index + 1}</div>
-                    `;
-                    item.classList.remove('active');
+                    circle.innerHTML = `<div class="number">${index + 1}</div>`;
+                    circle.classList.remove('active');
+                    nameDisplay.textContent = '';
                 }
             });
         }
@@ -388,6 +425,22 @@
             profileItems.forEach((item, index) => {
                 const isSelected = selectedMembers.some(member => member && member.originalIndex === index);
                 item.classList.toggle('selected', isSelected);
+            });
+        }
+
+        function copyRankingLink() {
+            const selectedNames = selectedMembers
+                .map((member, index) => member ? `${index + 1}. ${member.name}` : null)
+                .filter(name => name !== null)
+                .join('\n');
+
+            const text = `Meu Top 6 Time Turner:\n${selectedNames}\n\nCrie o seu em: https://t.me/timeturnerbr`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link copiado com sucesso!');
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                alert('Erro ao copiar o link');
             });
         }
 
@@ -409,4 +462,4 @@
         initializeProfiles();
     </script>
 </body>
-</html>
+</html
