@@ -127,8 +127,8 @@
             bottom: 4px; /* Mantido como estava */
             left: 50%;
             transform: translateX(-50%);
-            width: 20px; /* Diminuído para 20px */
-            height: 20px; /* Diminuído para 20px */
+            width: 15px; /* Diminuído para 15px */
+            height: 15px; /* Diminuído para 15px */
             background-color: #fff;
             border-radius: 50%;
             display: flex;
@@ -136,7 +136,7 @@
             justify-content: center;
             border: 2px solid var(--secondary-color);
             font-weight: bold;
-            font-size: 8px; /* Diminuído para 8px */
+            font-size: 7px; /* Diminuído para 7px */
             color: var(--primary-color);
             z-index: 2;
         }
@@ -237,25 +237,6 @@
             color: var(--secondary-color);
         }
 
-        .copy-link-btn {
-            display: block;
-            width: 120px;
-            margin: 20px auto;
-            padding: 12px 30px;
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .copy-link-btn:hover {
-            background-color: var(--hover-color);
-        }
-
         .telegram-link {
             display: block;
             max-width: 360px;
@@ -312,8 +293,6 @@
         </div>
     </div>
 
-    <button class="copy-link-btn" onclick="copyRankingLink()">Copiar Link</button>
-    
     <a href="https://t.me/timeturnerbr" target="_blank" class="telegram-link">
         Siga o Time Turner Brasil no Telegram para mais novidades! 
     </a>
@@ -428,22 +407,6 @@
             });
         }
 
-        function copyRankingLink() {
-            const selectedNames = selectedMembers
-                .map((member, index) => member ? `${index + 1}. ${member.name}` : null)
-                .filter(name => name !== null)
-                .join('\n');
-
-            const text = `Meu Top 6 Time Turner:\n${selectedNames}\n\nCrie o seu em: https://t.me/timeturnerbr`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Link copiado com sucesso!');
-            }).catch(err => {
-                console.error('Erro ao copiar:', err);
-                alert('Erro ao copiar o link');
-            });
-        }
-
         document.querySelector('.search-box').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
             const profileItems = document.querySelectorAll('.profile-item');
@@ -462,4 +425,4 @@
         initializeProfiles();
     </script>
 </body>
-</html
+</html>
