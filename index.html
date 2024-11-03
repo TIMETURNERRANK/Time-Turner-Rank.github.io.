@@ -241,6 +241,25 @@
             color: var(--secondary-color);
         }
 
+        .telegram-link {
+            display: block;
+            max-width: 360px;
+            margin: 30px auto;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff69b4, #4169e1, #8a2be2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .telegram-link:hover {
+            transform: translateY(-3px);
+        }
+
         .selected {
             opacity: 0.5;
             pointer-events: none;
@@ -282,6 +301,10 @@
             <!-- Profiles will be populated by JavaScript -->
         </div>
     </div>
+
+    <a href="https://t.me/timeturnerbr" target="_blank" class="telegram-link">
+        Siga o Time Turner Brasil no Telegram para mais novidades! 
+    </a>
 
     <script>
         const members = [
