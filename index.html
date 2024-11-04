@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,13 +69,13 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 colunas na linha superior */
+            grid-template-columns: repeat(3, 1fr); /* 3 columns in the top row */
             gap: 20px;
             justify-items: center;
         }
 
         .grid-container .bottom-row {
-            grid-template-columns: repeat(2, 1fr); /* 2 colunas na linha inferior */
+            grid-template-columns: repeat(2, 1fr); /* 2 columns in the bottom row */
         }
 
         .grid-item {
@@ -94,12 +94,12 @@
             justify-content: center;
             position: relative;
             transition: all 0.3s ease;
-            margin-bottom: 5px; /* Ajustado para aumentar espaço entre a foto e o nome */
+            margin-bottom: 5px; /* Increased space between the photo and the name */
         }
 
         .profile-name-display {
             position: absolute;
-            bottom: -11px; /* Desceu o nome em 1 pixel */
+            bottom: -11px; /* Moved the name down by 1 pixel */
             left: 50%;
             transform: translateX(-50%);
             width: 100px;
@@ -110,7 +110,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-transform: uppercase; /* Nomes em maiúsculas */
+            text-transform: uppercase; /* Names in uppercase */
         }
 
         .profile-circle.active {
@@ -128,11 +128,11 @@
 
         .number {
             position: absolute;
-            bottom: 4px; /* Mantido como estava */
+            bottom: 4px; /* Kept as it was */
             left: 50%;
             transform: translateX(-50%);
-            width: 15px; /* Diminuído para 15px */
-            height: 15px; /* Diminuído para 15px */
+            width: 15px; /* Decreased to 15px */
+            height: 15px; /* Decreased to 15px */
             background-color: #fff;
             border-radius: 50%;
             display: flex;
@@ -140,7 +140,7 @@
             justify-content: center;
             border: 2px solid var(--secondary-color);
             font-weight: bold;
-            font-size: 7px; /* Diminuído para 7px */
+            font-size: 7px; /* Decreased to 7px */
             color: var(--primary-color);
             z-index: 2;
         }
@@ -224,7 +224,7 @@
             font-weight: bold;
             font-size: 15px;
             margin-bottom: 4px;
-            text-transform: uppercase; /* Nomes em maiúsculas */
+            text-transform: uppercase; /* Names in uppercase */
             color: var(--primary-color);
         }
 
@@ -277,23 +277,23 @@
             <img src="img/sitelogo.png" alt="Site Logo">
         </div>
         <h1>TIME TURNER RANKER</h1>
-        <p>Faça seu próprio top 5!</p>
+        <p>Create your own top 5!</p>
     </div>
 
     <div class="top-grid">
         <h2>TOP 5</h2>
         <div class="grid-container" id="rankGrid">
-            <!-- 3 garotas na linha superior -->
+            <!-- 3 girls in the top row -->
             <div class="grid-item"></div>
             <div class="grid-item"></div>
             <div class="grid-item"></div>
-            <!-- 2 garotas na linha inferior -->
+            <!-- 2 girls in the bottom row -->
             <div class="grid-item" style="grid-column: span 2;"></div>
         </div>
     </div>
 
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Pesquisar">
+        <input type="text" class="search-box" placeholder="Search">
     </div>
 
     <div class="profiles-container">
@@ -399,7 +399,7 @@
                         <div class="number">${index + 1}</div>
                     `;
                     circle.classList.add('active');
-                    nameDisplay.textContent = member.name.toUpperCase(); // Nomes em maiúsculas
+                    nameDisplay.textContent = member.name.toUpperCase(); // Names in uppercase
                 } else {
                     circle.innerHTML = `<div class="number">${index + 1}</div>`;
                     circle.classList.remove('active');
